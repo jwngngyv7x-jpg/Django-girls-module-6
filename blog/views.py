@@ -34,5 +34,11 @@ def post_draft_list(request):
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
+def post_publish(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method=='POST':
+        post.publish()
+    return redirect('post_detail', pk=pk)
+
     return render(request, 'blog/post_edit.html', {'form': form})
 
