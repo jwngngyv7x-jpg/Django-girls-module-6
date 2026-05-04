@@ -8,18 +8,31 @@
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     </head>
     <body>
-        <header class="page-header">
-          <div class="container">
-              <h1><a href="/">Django Girls Blog</a></h1>
-          </div>
-        </header>
-        <main class="container">
-            <div class="row">
-                <div class="col">
-                {% block content %}
-                {% endblock %}
-                </div>
-            </div>
-        </main>
+        <header class="page-header">
+            <div class="container">
+                <a href="{% url 'post_new' %}" class="top-menu">
+                    {% include './icons/file-earmark-plus.svg' %}
+                </a>
+                <h1><a href="/">Django Girls Blog</a></h1>
+            </div>
+        </header>
+        <main class="content container">
+            <div class="row">
+                <div class="col">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </main>
     </body>
 </html>
+
+Sarah Gallagher:
+	from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.post_list, name='post_list'),
+    path('post/<int:pk>/', views.post_detail, name='post_detail'),
+    path('post/new/', views.post_new, name='post_new'),
+]
